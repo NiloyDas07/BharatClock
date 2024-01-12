@@ -10,7 +10,6 @@ function CurrentTime() {
 
     return () => {
       clearInterval(intervalID);
-      console.log("cleared");
     };
   }, []);
 
