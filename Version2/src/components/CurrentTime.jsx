@@ -1,5 +1,19 @@
+import { useEffect, useState } from "react";
+
 function CurrentTime() {
-  const date = new Date();
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    const intervalID = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalID);
+      console.log("cleared");
+    };
+  }, []);
+
   const dateOptions = {
     timezone: "India",
     weekday: "long",
@@ -8,11 +22,10 @@ function CurrentTime() {
     day: "numeric",
   };
   const timeOptions = { timezone: "India" };
-  const time = date.toLocaleTimeString("en-IN", timeOptions);
 
   return (
     <p className="">
-      This is the current time {time},{" "}
+      This is the current time {date.toLocaleTimeString("en-IN", timeOptions)} -{" "}
       {date.toLocaleDateString("en-IN", dateOptions)}
     </p>
   );
